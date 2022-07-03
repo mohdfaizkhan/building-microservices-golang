@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/mohdfaizkhan/building-microservices-golang/main/products-api/handlers"
 )
 
 func main() {
