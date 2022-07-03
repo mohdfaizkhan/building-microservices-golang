@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/mohdfaizkhan/building-microservices-golang/main/products-api/handlers"
+	"github.com/mohdfaizkhan/building-microservices-golang/products-api/handlers"
 )
 
 func main() {
