@@ -36,13 +36,13 @@ func main() {
 
 	l := log.New(os.Stdout, "product api", log.LstdFlags)
 
-	hh := handlers.NewHello(l)
-	gb := handlers.NewGoodbye(l)
+	ph := handlers.NewProducts(l)
+	//gb := handlers.NewGoodbye(l)
 
 	sm := http.NewServeMux()
 
-	sm.Handle("/", hh)
-	sm.Handle("/goodbye", gb)
+	sm.Handle("/", ph)
+	//sm.Handle("/goodbye", gb)
 
 	// http.ListenAndServe(":8080", nil)
 
