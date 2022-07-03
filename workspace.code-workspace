@@ -1,16 +1,7 @@
 {
 	"folders": [
     {
-      "path": "frontend"
-    },
-    {
-      "path": "product-images"
-    },
-    {
       "path": "product-api"
-    },
-    {
-      "path": "currency"
     }
   ],
 	"remoteAuthority": "wsl+Ubuntu",
