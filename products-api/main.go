@@ -11,6 +11,8 @@ import (
 	"github.com/mohdfaizkhan/building-microservices-golang/products-api/handlers"
 )
 
+//var bindAddress = env.String("BIND_ADDRESS", false, ":9090", "Bind address for the server")
+
 func main() {
 
 	// http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
@@ -37,12 +39,12 @@ func main() {
 	l := log.New(os.Stdout, "product api", log.LstdFlags)
 
 	ph := handlers.NewProducts(l)
-	//gb := handlers.NewGoodbye(l)
+	gb := handlers.NewGoodbye(l)
 
 	sm := http.NewServeMux()
 
 	sm.Handle("/", ph)
-	//sm.Handle("/goodbye", gb)
+	sm.Handle("/goodbye", gb)
 
 	// http.ListenAndServe(":8080", nil)
 
