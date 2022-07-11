@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"time"
 )
 
@@ -66,6 +67,8 @@ func UpdateProduct(id int, p *Product) error {
 	}
 
 	p.ID = id
+
+	log.Print("pro", productList[pos])
 	productList[pos] = p
 
 	return nil
@@ -75,8 +78,12 @@ var ErrProductNotFound = fmt.Errorf("Product Not Found")
 
 func findPrdouct(id int) (*Product, int, error) {
 
+	log.Print("product id inside findProduct-----", id)
+	log.Print("product id inside findProduct-----", productList)
 	for id, p := range productList {
-		if p.ID == id {
+		log.Print("product id inside findProduct-----loop   ", p.ID)
+		if p.ID != id {
+			log.Print("product id inside findProduct-----loop  ", p.ID)
 			return p, id, nil
 		}
 	}

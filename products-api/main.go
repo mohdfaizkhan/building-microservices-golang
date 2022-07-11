@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/gorilla/mux"
 	"github.com/mohdfaizkhan/building-microservices-golang/products-api/handlers"
 )
 
@@ -39,12 +40,30 @@ func main() {
 	l := log.New(os.Stdout, "product api", log.LstdFlags)
 
 	ph := handlers.NewProducts(l)
-	gb := handlers.NewGoodbye(l)
+	//gb := handlers.NewGoodbye(l)
 
-	sm := http.NewServeMux()
+	//sm := http.NewServeMux()
 
-	sm.Handle("/", ph)
-	sm.Handle("/goodbye", gb)
+	// Using Gorilla framework
+	// github.com/gorilla/mux v1.8.0
+	sm := mux.NewRouter()
+
+	//sm.Handle("/", ph)
+
+	getRouter := sm.Methods(http.MethodGet).Subrouter()
+
+	getRouter.HandleFunc("/", ph.GetProducts)
+	//getRouter.Use(ph.MiddlewareProductValidation)
+
+	putRouter := sm.Methods(http.MethodPut).Subrouter()
+	putRouter.HandleFunc("/{id:[0-9]+}", ph.UpdateProducts)
+	putRouter.Use(ph.MiddlewareProductValidation)
+
+	postRouter := sm.Methods(http.MethodPost).Subrouter()
+	postRouter.HandleFunc("/", ph.AddProduct)
+	postRouter.Use(ph.MiddlewareProductValidation)
+
+	//sm.Handle("/goodbye", gb).Methods("GET")
 
 	// http.ListenAndServe(":8080", nil)
 
